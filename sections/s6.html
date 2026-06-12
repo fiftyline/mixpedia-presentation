@@ -1,0 +1,434 @@
+<section class="section" id="s6">
+  <div class="section-header">
+    <span class="section-number">06</span>
+    <h2 class="section-title">실행 계획 및 확산 방안</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="subsection" id="s6-1">
+    <div class="subsection-title">6-1. 프롬프트 및 데이터 고도화</div>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div class="card">
+        <div
+          style="
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+          "
+        >
+          타겟팅 정보 추출 프롬프트 강화
+        </div>
+        <div
+          style="
+            font-family: var(--font-body);
+            font-size: 0.825rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+          "
+        >
+          현재는 타겟팅 유형(DEMO·INTEREST·RETARGETING 등)과 데모
+          타겟팅(성별·연령대) 정도만 구조화되어 있으나, 실제 집행 데이터에는
+          키워드·관심사·지역·리타겟팅 조건 등 훨씬 세밀한 타겟팅 정보가 포함되어
+          있음. 이를 정확하게 파싱하려면 타겟팅 유형별 세부 추출 규칙을
+          프롬프트에 추가 보완해야 하며, 맥락 의존적인 값 해석 정확도 향상을
+          위해 보다 성능이 높은 모델 활용도 검토 필요
+        </div>
+      </div>
+
+      <div
+        class="card"
+        style="
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+          align-items: center;
+        "
+      >
+        <div>
+          <div
+            style="
+              font-family: var(--font-body);
+              font-size: 0.875rem;
+              font-weight: 700;
+              color: var(--text);
+              margin-bottom: 8px;
+            "
+          >
+            데이터 정확도 향상 — 사용자 수정 피드백 루프
+          </div>
+          <div
+            style="
+              font-family: var(--font-body);
+              font-size: 0.825rem;
+              color: var(--text-secondary);
+              line-height: 1.75;
+            "
+          >
+            LLM이 구조화한 데이터는 업종 분류·타겟팅·캠페인명 등에서 오분류가
+            발생할 수 있음. 데모 시스템에 구현된
+            <strong>데이터 수정 요청</strong> 기능을 통해 실사용자가 직접 오류를
+            제보하고, 이를 누적·분석하여 프롬프트 보완 및 재처리에 반영하는
+            <strong>Human-in-the-loop 피드백 루프</strong>를 운영하면 데이터
+            정확도를 지속적으로 향상시킬 수 있음
+          </div>
+        </div>
+        <div>
+          <div
+            style="
+              font-family: var(--font-body);
+              font-size: 0.7rem;
+              color: var(--text-tertiary);
+              margin-bottom: 6px;
+            "
+          >
+            데이터 수정 요청 — 업종·타겟팅 등 오분류 제보
+          </div>
+          <img
+            src="statics/mix-edit.png"
+            alt="데이터 수정 요청"
+            style="
+              display: block;
+              width: 100%;
+              border: 1px solid var(--border);
+              border-radius: 4px;
+            "
+          />
+        </div>
+      </div>
+
+      <div class="card">
+        <div
+          style="
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+          "
+        >
+          미디어믹스 데이터 지속 적재
+        </div>
+        <div
+          style="
+            font-family: var(--font-body);
+            font-size: 0.825rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+          "
+        >
+          실질적인 벤치마크 가치를 유지하려면, 일정 기간마다 주기적으로 엑셀
+          파일을 적재할 수 있는 수집 기간 및 리소스가 필요하며, 데이터가
+          축적될수록 업종별·매체별 통계의 신뢰도가 높아질 수 있음.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection" id="s6-2">
+    <div class="subsection-title">6-2. 시스템 고도화</div>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div class="card">
+        <div
+          style="
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+          "
+        >
+          UI/UX 개선
+        </div>
+        <div
+          style="
+            font-family: var(--font-body);
+            font-size: 0.825rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+          "
+        >
+          현재 데모 시스템은 핵심 기능 검증에 초점을 맞춰 개발된 프로토타입
+          수준으로, 실무 사용 환경에서는 검색 필터 구성·결과 정렬·화면 레이아웃
+          등 여러 UX 측면에서 보완이 필요함. 업무 중 빠르게 참조할 수 있도록
+          <strong>미디어 믹스 임베딩 및 검색 성능 개선</strong>, 자주 쓰는
+          조건을 저장하는 <strong>필터 프리셋</strong> 등을 적용하여 실무자가
+          체감하는 사용성을 높일 계획
+        </div>
+      </div>
+
+      <div class="card">
+        <div
+          style="
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+          "
+        >
+          콘텐츠 강화 — 효율 지표 대시보드
+        </div>
+        <div
+          style="
+            font-family: var(--font-body);
+            font-size: 0.825rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+          "
+        >
+          현재는 미디어 믹스 구성(매체·예산·타겟팅)을 조회하는 것이 주된
+          기능이나, 실무에서 더욱 높은 가치를 지니는 것은
+          <strong
+            >매체별 집행 단가(CPM·CPC)와 CTR·VTR 등의 성과 효율 지표</strong
+          >임. 집행 보고서 내 성과 데이터를 추가 구조화하여 업종·매체·타겟팅
+          조건별 평균 효율을 시각화하는
+          <strong>효율 벤치마크 대시보드</strong>를 구축하면, 제안 단계에서의
+          예상 효율 추정과 사후 성과 평가 모두에 활용할 수 있음. 특히
+          네이버·Google·Meta·카카오 등 주요 매체는 공개된 레퍼런스가 비교적
+          풍부하지만 (D.Assistant), 버티컬·서브 매체의 경우 외부에서 실질적인
+          집행 단가나 효율 데이터를 구하기가 어렵기 때문에 자사 집행 이력 기반의
+          <strong>서브 매체 효율 벤치마크</strong>는 제안 경쟁력 측면에서 특히
+          높은 차별화 가치를 가짐
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection" id="s6-3">
+    <div class="subsection-title">6-3. 기존 DMC미디어 시스템과의 결합</div>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div class="card">
+        <img
+          src="statics/dmc-triangle.png"
+          alt="DMC미디어 시스템 결합 구조"
+          style="display: block; width: 50%; margin: 0 auto; border-radius: 3px"
+        />
+      </div>
+
+      <div class="card">
+        <div
+          style="
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+          "
+        >
+          주요 확장 방향
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+          "
+        >
+          <div style="display: flex; align-items: flex-start; gap: 10px">
+            <span
+              style="
+                font-family: var(--font-data);
+                font-size: 0.65rem;
+                font-weight: 700;
+                color: var(--accent);
+                background: var(--accent-muted);
+                padding: 2px 7px;
+                border-radius: 3px;
+                flex-shrink: 0;
+                margin-top: 2px;
+              "
+              >01</span
+            ><div style="flex: 1; min-width: 0;">
+              <span
+                style="
+                  font-family: var(--font-body);
+                  font-size: 0.825rem;
+                  color: var(--text-secondary);
+                  line-height: 1.65;
+                "
+                >업종 및 매체 입력 시 <strong>미디어 전략 자동 수립</strong> —
+                유사 집행 데이터를 참조해 최적 믹스 초안 생성 → <strong>DMC미디어의 Media Planner Agent</strong></span
+              >
+              <div
+                style="
+                  margin-top: 8px;
+                  padding: 10px 14px;
+                  background: var(--surface-raised);
+                  border: 1px solid var(--border);
+                  border-radius: 4px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                "
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  style="
+                    width: 15px;
+                    height: 15px;
+                    flex-shrink: 0;
+                    color: var(--accent);
+                  "
+                >
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                </svg>
+                <span
+                  style="
+                    font-family: var(--font-body);
+                    font-size: 0.8rem;
+                    color: var(--text-secondary);
+                  "
+                  >매체 조합 산출 및 예산 분배 관련 연구 내역 (데이터컨설팅팀)</span
+                >
+                <a
+                  href="https://drive.google.com/file/d/1x7D6KW5Gcy_MCHwOyuo1rSUAKzL172nN/view?usp=drive_link"
+                  target="_blank"
+                  rel="noopener"
+                  style="
+                    font-family: var(--font-data);
+                    font-size: 0.75rem;
+                    color: var(--accent);
+                    text-decoration: none;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 4px;
+                  "
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    style="width: 13px; height: 13px; flex-shrink: 0"
+                  >
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                  </svg><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    style="width: 12px; height: 12px; flex-shrink: 0"
+                  >
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg></a
+                >
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 10px">
+            <span
+              style="
+                font-family: var(--font-data);
+                font-size: 0.65rem;
+                font-weight: 700;
+                color: var(--accent);
+                background: var(--accent-muted);
+                padding: 2px 7px;
+                border-radius: 3px;
+                flex-shrink: 0;
+                margin-top: 2px;
+              "
+              >02</span
+            ><span
+              style="
+                font-family: var(--font-body);
+                font-size: 0.825rem;
+                color: var(--text-secondary);
+                line-height: 1.65;
+              "
+              >업종·예산·타겟 기반 <strong>최적 매체 조합 추천</strong> — 축적된
+              벤치마크 데이터 (+ D.Assistant)로 제안 근거 확보</span
+            >
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 10px">
+            <span
+              style="
+                font-family: var(--font-data);
+                font-size: 0.65rem;
+                font-weight: 700;
+                color: var(--accent);
+                background: var(--accent-muted);
+                padding: 2px 7px;
+                border-radius: 3px;
+                flex-shrink: 0;
+                margin-top: 2px;
+              "
+              >03</span
+            ><span
+              style="
+                font-family: var(--font-body);
+                font-size: 0.825rem;
+                color: var(--text-secondary);
+                line-height: 1.65;
+              "
+              ><strong>예상 성과 및 도달률 시뮬레이션</strong> 수행 —
+              theDAP 연계를 통한 집행 전 효율 예측</span
+            >
+          </div>
+        </div>
+        <div
+          style="
+            border-top: 1px solid var(--border);
+            padding-top: 12px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+          "
+        >
+          <div
+            style="
+              font-family: var(--font-body);
+              font-size: 0.72rem;
+              font-weight: 600;
+              color: var(--accent);
+              background: var(--accent-muted);
+              padding: 5px 13px;
+              border-radius: 20px;
+            "
+          >
+            매체 전략 수립 및 미디어 플래닝에서의 반복 업무 자동화
+          </div>
+          <div
+            style="
+              font-family: var(--font-body);
+              font-size: 0.72rem;
+              font-weight: 600;
+              color: var(--accent);
+              background: var(--accent-muted);
+              padding: 5px 13px;
+              border-radius: 20px;
+            "
+          >
+            데이터 기반 의사결정 체계 강화
+          </div>
+          <div
+            style="
+              font-family: var(--font-body);
+              font-size: 0.72rem;
+              font-weight: 600;
+              color: var(--accent);
+              background: var(--accent-muted);
+              padding: 5px 13px;
+              border-radius: 20px;
+            "
+          >
+            DMC미디어의 Agentic Media 솔루션으로 진화
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

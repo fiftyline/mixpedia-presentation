@@ -1,0 +1,1215 @@
+<section class="section" id="s4">
+  <div class="section-header">
+    <span class="section-number">04</span>
+    <h2 class="section-title">상세 수행 내용</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="subsection" id="s4-1">
+    <div class="subsection-title">4-1. 단계별 데이터 처리</div>
+    <div class="grid-wrap">
+      <div class="proc-steps">
+        <div class="proc-step">
+          <div class="proc-spine">
+            <div class="proc-num">00</div>
+            <div class="proc-line"></div>
+          </div>
+          <div class="proc-body">
+            <div class="proc-title">엑셀 보고서 취합</div>
+            <div class="proc-desc">
+              사내 축적 광고 캠페인 엑셀 보고서 수집 및 정리 — 2023년 부터
+              집행된 4,753건의 미디어믹스 취합
+            </div>
+            <div class="proc-meta">
+              <span class="proc-tag proc-tag--lang">Python</span>
+              <span class="proc-tag proc-tag--lang">Node.js</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proc-step">
+          <div class="proc-spine">
+            <div class="proc-num">01</div>
+            <div class="proc-line"></div>
+          </div>
+          <div class="proc-body">
+            <div class="proc-title">엑셀 보고서별 시트 목록 수집</div>
+            <div class="proc-desc">
+              파일별 전체 시트 목록 및 숨김 해제 시트 목록을 수집 — 파일 연도
+              추정값 포함
+            </div>
+            <div class="proc-meta">
+              <span class="proc-tag proc-tag--lang">Python</span>
+              <span class="proc-tag proc-tag--lang">Node.js</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proc-step">
+          <div class="proc-spine">
+            <div class="proc-num">02</div>
+            <div class="proc-line"></div>
+          </div>
+          <div class="proc-body">
+            <div class="proc-title">미디어 믹스 시트 감지</div>
+            <div class="proc-desc">
+              시트명에 <code>mix</code> / <code>믹스</code> 키워드 포함 여부로
+              미디어믹스 시트를 판별 (4,753건 중, 3,558건)
+            </div>
+            <div class="proc-meta">
+              <span class="proc-tag proc-tag--rule">키워드 매칭</span>
+              <span class="proc-tag proc-tag--lang">Python</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proc-step">
+          <div class="proc-spine">
+            <div class="proc-num">03</div>
+            <div class="proc-line"></div>
+          </div>
+          <div class="proc-body">
+            <div class="proc-title">미디어 믹스 영역 분리</div>
+            <div class="proc-desc">
+              헤더 행(anchor)을 자동 감지하여 상단
+              <strong>Macro</strong>(캠페인 요약 영역)와 하단
+              <strong>Micro</strong>(매체별 데이터 행) 블록으로 분리
+            </div>
+            <div class="proc-meta">
+              <span class="proc-tag proc-tag--rule">규칙 기반 파싱</span>
+              <span class="proc-tag proc-tag--lang">Python</span>
+              <span class="proc-tag proc-tag--lang">Excel</span>
+            </div>
+            <div class="parse-wrap">
+              <img
+                src="statics/sample-mediamix.png"
+                alt="미디어 믹스 영역 분리"
+                class="parse-img"
+              />
+              <div class="parse-arrow">→</div>
+              <div class="parse-panels">
+                <div class="parse-panel">
+                  <div class="parse-panel-label">상단 - Macro</div>
+                  <pre class="parse-code">[
+  { <span class="pc-key">"col_000"</span>: <span class="pc-str">"Client"</span>, <span class="pc-key">"col_001"</span>: <span class="pc-str">"노랑통닭"</span>, <span class="pc-key">"col_002"</span>: <span class="pc-str">"Budget"</span>, <span class="pc-key">"col_003"</span>: <span class="pc-num">53000000</span> },
+  { <span class="pc-key">"col_000"</span>: <span class="pc-str">"Period"</span>, <span class="pc-key">"col_001"</span>: <span class="pc-str">"6/1~6/30"</span>, <span class="pc-key">"col_002"</span>: <span class="pc-str">"Market Cost"</span>, <span class="pc-key">"col_003"</span>: <span class="pc-num">53500000</span> },
+  { <span class="pc-key">"col_000"</span>: <span class="pc-str">"Impression"</span>, <span class="pc-key">"col_001"</span>: <span class="pc-num">21393534</span>, <span class="pc-null">...</span> }
+]</pre>
+                </div>
+                <div class="parse-panel">
+                  <div class="parse-panel-label">하단 - Micro</div>
+                  <pre class="parse-code">[
+  { <span class="pc-key">"row_no"</span>: <span class="pc-num">0</span>, <span class="pc-key">"media"</span>: <span class="pc-str">"유튜브"</span>, <span class="pc-key">"budget"</span>: <span class="pc-num">38000000</span>, <span class="pc-key">"ad type"</span>: <span class="pc-str">"VVC"</span>,
+    <span class="pc-key">"impression"</span>: <span class="pc-num">6354515</span>, <span class="pc-key">"e.click"</span>: <span class="pc-num">1271</span>, <span class="pc-key">"e.view"</span>: <span class="pc-num">1461538</span>, <span class="pc-null">...</span> },
+  { <span class="pc-key">"row_no"</span>: <span class="pc-num">1</span>, <span class="pc-key">"media"</span>: <span class="pc-str">"타겟팅게이츠"</span>, <span class="pc-key">"budget"</span>: <span class="pc-num">5000000</span>, <span class="pc-key">"ad type"</span>: <span class="pc-str">"네트워크"</span>,
+    <span class="pc-key">"impression"</span>: <span class="pc-num">4347826</span>, <span class="pc-key">"e.click"</span>: <span class="pc-num">100000</span>, <span class="pc-null">...</span> },
+  <span class="pc-null">...</span>
+]</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="proc-step">
+          <div class="proc-spine">
+            <div class="proc-num">04</div>
+            <div class="proc-line"></div>
+          </div>
+          <div class="proc-body">
+            <div class="proc-title">미디어 믹스 하단 영역 컬럼 분류</div>
+            <div class="proc-desc">
+              Micro 영역의 고유 컬럼 조합을 LLM으로 분류 — device / targeting /
+              period / remark 역할 판별
+            </div>
+            <div class="proc-meta">
+              <span class="proc-tag proc-tag--llm">OpenAI Batch API</span>
+              <span class="proc-tag proc-tag--llm">Structured Output</span>
+              <span class="proc-tag proc-tag--lang">Python</span>
+              <span class="proc-tag proc-tag--lang">OpenAI</span>
+              <span class="proc-tag proc-tag--lang">LangChain</span>
+            </div>
+            <div class="embed-raw" style="border-radius: 4px; margin-top: 10px">
+              <div class="embed-raw-label">PROMPT</div>
+              <pre
+                class="embed-code"
+                style="
+                  font-size: 0.72rem;
+                  line-height: 1.75;
+                  max-height: 320px;
+                  overflow-y: auto;
+                "
+              >
+당신은 디지털 마케팅 미디어믹스 표의 컬럼을 최종 구조화 스키마에 맞게 분류하는 데이터 분석가입니다.
+
+입력:
+1. COLUMNS: 컬럼명 목록
+2. COLUMN_SAMPLES: 각 컬럼의 실제 값 샘플
+3. MICRO_COLUMN_SET: 정규화된 컬럼 조합 문자열
+
+목표:
+각 컬럼이 최종 row 구조화에 어떤 역할을 하는지 분류하세요.
+
+[분류 대상]
+- device_columns
+- targeting_columns
+- period_columns
+- remark_columns
+
+[컬럼명 무결성 규칙]
+- 출력 배열에 들어가는 모든 값은 반드시 입력 COLUMNS에 존재하는 문자열과 완전히 동일해야 합니다.
+- COLUMNS에 없는 컬럼명을 새로 만들거나 번역하거나 요약하거나 수정하지 마세요.
+- 입력 컬럼명이 "exp.imps (예상노출량)"이면 반드시 그 문자열 그대로 출력하세요.
+- "impressions", "예상노출", "exp.imps"처럼 바꿔 쓰면 안 됩니다.
+
+[공통 원칙]
+- 하나의 컬럼은 여러 그룹에 동시에 들어갈 수 있습니다.
+- 컬럼명만 보지 말고 COLUMN_SAMPLES의 실제 값 패턴을 함께 보고 판단하세요.
+- 정의된 스키마 외의 필드는 생성하지 마세요.
+
+[device_columns 규칙]
+- 디바이스 정보 컬럼입니다.
+- 예: PC, MO, Mobile, 모바일, App, Tablet, TV, IPTV, CTV, DOOH, OOH, ALL
+- Location, 랜딩 구분 같은 컬럼이라도 값이 PC/MO/Mobile/ALL 등으로 반복되면 포함할 수 있습니다.
+- Remark/비고 성격 컬럼이라도 디바이스 정보가 반복적으로 담기면 포함할 수 있습니다.
+
+[targeting_columns 규칙]
+- 타겟팅 조건 컬럼입니다.
+- 예: demo, gender, age, M2034, F2539, MF1944, keyword, interest, geo, region, retargeting, DMP, audience
+- Remark/비고 성격 컬럼이라도 타겟팅 정보가 반복적으로 담기면 포함할 수 있습니다.
+
+[period_columns 규칙]
+- 광고 집행 기간을 나타내는 컬럼입니다.
+- 날짜 범위, 시작일, 종료일, schedule, period, month 등이 해당합니다.
+- 단순 일수(# of days)는 기간 계산 보조 컬럼이면 포함할 수 있습니다.
+
+[remark_columns 규칙]
+- 비고, remark, note, notice, description, 설명 등 자유서술 컬럼입니다.
+- 타겟팅/디바이스/광고집행기간 해석에 보조 근거로 사용할 수 있는 텍스트 컬럼만 포함하세요.
+
+[출력 규칙]
+- 반드시 아래 필드만 포함한 MicroColumnGroups JSON을 반환하세요.
+- 설명문 없이 JSON만 반환하세요.</pre
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="proc-step">
+          <div class="proc-spine">
+            <div class="proc-num">05</div>
+            <div class="proc-line"></div>
+          </div>
+          <div class="proc-body">
+            <div class="proc-title">미디어 믹스 하단 영역 데이터 구조화</div>
+            <div class="proc-desc">
+              컬럼 분류 결과를 기반으로 행별 디바이스 · 타겟팅 · 집행 기간 추출,
+              정제(환율 변환, 결측값 대체, 기간 보정) 후 적재
+            </div>
+            <div class="proc-meta">
+              <span class="proc-tag proc-tag--llm">OpenAI Batch API</span>
+              <span class="proc-tag proc-tag--llm">Structured Output</span>
+              <span class="proc-tag proc-tag--lang">Python</span>
+              <span class="proc-tag proc-tag--lang">OpenAI</span>
+              <span class="proc-tag proc-tag--lang">LangChain</span>
+            </div>
+            <div class="result-wrap" style="margin-top: 10px">
+              <div class="embed-raw" style="border-radius: 4px">
+                <div class="embed-raw-label">PROMPT</div>
+                <pre
+                  class="embed-code"
+                  style="
+                    font-size: 0.72rem;
+                    line-height: 1.75;
+                    max-height: 320px;
+                    overflow-y: auto;
+                  "
+                >
+당신은 디지털 마케팅 미디어믹스 표의 identity row를 최종 구조화 데이터로 변환하는 데이터 분석가입니다.
+
+입력:
+1. IDENTITY_ROWS: 각 행의 row_no와 identity_text로 구성된 리스트
+   - row_no: 원본 행 번호
+   - identity_text: 아래 형식으로 구성된 텍스트 (---로 구분)
+     [device] 디바이스 관련 값
+     [targeting] 타겟팅 관련 값
+     [period] 기간 관련 값
+     [remark] 비고/설명 관련 값
+   - 각 카테고리는 참고용이며 실제 값을 중심으로 판단하세요.
+   - 동일 카테고리가 여러 번 등장할 수 있습니다.
+2. FILE_YEAR: 파일 작성 추정 연도
+
+--------------------------------
+[중요 원칙]
+- [device] 태그 값은 device 필드 판단에 우선 활용하세요.
+- [targeting] 태그 값은 targeting_type, target_gender, target_age 판단에 우선 활용하세요.
+- [period] 태그 값은 dt_start, dt_end 판단에 우선 활용하세요.
+- [remark] 태그 값은 보조 정보로 활용하세요. remark에 device/targeting/period 정보가 포함될 수 있습니다.
+- 태그가 없거나 애매한 값도 문맥으로 판단하세요.
+
+--------------------------------
+[절대 규칙]
+- 입력으로 받은 모든 row_no를 반드시 1:1로 반환하세요
+- 어떤 row도 제거하지 마세요
+- 판단이 어려운 row라도 반드시 빈 값으로라도 반환하세요
+
+--------------------------------
+[중요 원칙]
+- 각 row는 독립적으로 판단하세요.
+- 입력 row_no는 반드시 그대로 반환하세요.
+- 다른 row 값을 참고하거나 전파하지 마세요.
+- identity_text의 각 값을 종합적으로 해석하여 판단하세요.
+- 하나의 값에 여러 정보가 복합적으로 담길 수 있습니다.
+- 정의된 스키마 외 필드는 생성하지 마세요.
+- 설명 없이 JSON만 출력하세요.
+
+--------------------------------
+[필드 규칙]
+
+0. row_no
+- 입력 row_no를 그대로 반환하세요.
+
+--------------------------------
+1. device
+- PC, MO, TV, OOH 4가지로 분류하세요.
+- MO: Mobile, 모바일, APP, Mo, 앱 등 포함
+- TV: TV, IPTV, CTV 등 포함
+- OOH: OOH, DOOH, 옥외 광고 등 포함
+- PC/MO, PC&Mobile, ALL 등 복합/전체 표현은 ["PC", "MO"]로 처리하세요.
+- PC/MO/TV는 ["PC", "MO", "TV"]로 처리하세요.
+- 4가지로 분류되지 않으면 ["ETC"]로 처리하세요.
+- 알 수 없으면 []
+
+--------------------------------
+2. targeting_type
+- 값을 중심으로 판단하세요. 값이 어떤 타겟팅 방식인지 해석하세요.
+- DEMO: 성별, 연령, 인구통계 기반 타겟팅
+  예: P2539, F2039, M2044, 25~44 여성, 20대~40대
+- INTEREST: 관심사, 키워드, 구매의도, 카테고리 기반 타겟팅
+  예: 관심사, Purchase Intention, 키워드, 구매의도
+- RETARGETING: 기존 접촉 유저 기반 타겟팅
+  예: 리타겟팅, 방문자, CustomerJourney, LAL(유사유저), 고객리스트, 반응유저
+- DMP: 외부 데이터 기반 타겟팅
+  예: DMP, 3rd party, 세그먼트
+- GEO: 실제 지역명 기반 타겟팅
+  예: 서울, 경기, 수도권, 부산
+  주의: PC/MO 등 디바이스값, Location/지면 등 게재위치는 GEO가 아닙니다.
+- ETC: 타겟팅은 있으나 위 유형으로 분류 불가
+- 논타겟팅(Nontargeting, Non-Targeting) 또는 타겟팅 정보 없으면 []
+
+--------------------------------
+3. target_gender / target_age_min / target_age_max
+
+identity_text 전체에서 성별/연령 패턴을 찾으세요.
+
+예:
+- P2539 → target_gender="P", target_age_min=25, target_age_max=39
+- M2034 → target_gender="M", target_age_min=20, target_age_max=34
+- F2039 → target_gender="F", target_age_min=20, target_age_max=39
+- MF1844 → target_gender="P", target_age_min=18, target_age_max=44
+- 2044 → target_gender="P", target_age_min=20, target_age_max=44
+- 25~44 여성 → target_gender="F", target_age_min=25, target_age_max=44
+- 20대~40대 → target_gender="P", target_age_min=20, target_age_max=49
+
+알 수 없으면:
+- target_gender="P"
+- target_age_min=0
+- target_age_max=0
+
+--------------------------------
+4. dt_start / dt_end
+
+identity_text 전체에서 기간 표현을 찾으세요.
+반드시 YYYY-MM-DD 형식으로 반환하세요.
+연도는 FILE_YEAR를 기준으로 하세요.
+해가 바뀌는 경우 시작월보다 종료월이 작으면 종료일 연도는 FILE_YEAR+1로 처리하세요.
+
+예:
+- "3/1~3/31" + FILE_YEAR=2024 → dt_start="2024-03-01", dt_end="2024-03-31"
+- "11/24~12/21" + FILE_YEAR=2024 → dt_start="2024-11-24", dt_end="2024-12-21"
+- "11/24~1/15" + FILE_YEAR=2024 → dt_start="2024-11-24", dt_end="2025-01-15"
+- "7월" + FILE_YEAR=2024 → dt_start="2024-07-01", dt_end="2024-07-31"
+- 알 수 없으면 ""
+
+--------------------------------
+[출력 규칙]
+
+반드시 아래 JSON 형식만 반환하세요.
+
+{
+  "rows": []
+}</pre
+                >
+              </div>
+              <div class="result-arrow">→</div>
+              <div class="parse-panel">
+                <div class="parse-panel-label">OUTPUT — 구조화 결과</div>
+                <pre class="parse-code">{
+  <span class="pc-key">"row_no"</span>: <span class="pc-num">0</span>,
+  <span class="pc-key">"device"</span>: [<span class="pc-str">"MO"</span>, <span class="pc-str">"PC"</span>],
+  <span class="pc-key">"targeting_type"</span>: [
+    <span class="pc-str">"DEMO"</span>, <span class="pc-str">"INTEREST"</span>,
+    <span class="pc-str">"RETARGETING"</span>
+  ],
+  <span class="pc-key">"target_gender"</span>: <span class="pc-str">"P"</span>,
+  <span class="pc-key">"target_age_min"</span>: <span class="pc-num">18</span>,
+  <span class="pc-key">"target_age_max"</span>: <span class="pc-num">44</span>,
+  <span class="pc-key">"dt_start"</span>: <span class="pc-str">"2025-06-01"</span>,
+  <span class="pc-key">"dt_end"</span>: <span class="pc-str">"2025-06-30"</span>
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="proc-step">
+          <div class="proc-spine">
+            <div class="proc-num">06</div>
+            <div class="proc-line"></div>
+          </div>
+          <div class="proc-body">
+            <div class="proc-title">미디어 믹스 상단 영역 데이터 구조화</div>
+            <div class="proc-desc">
+              Macro 블록 + 파일명 기반으로 광고주명 · 캠페인명 · 집행 기간 등
+              캠페인 메타 정보를 추출
+            </div>
+            <div class="proc-meta">
+              <span class="proc-tag proc-tag--llm">OpenAI Batch API</span>
+              <span class="proc-tag proc-tag--llm">Structured Output</span>
+              <span class="proc-tag proc-tag--lang">Python</span>
+              <span class="proc-tag proc-tag--lang">OpenAI</span>
+              <span class="proc-tag proc-tag--lang">LangChain</span>
+              <span class="proc-tag proc-tag--lang">BigQuery</span>
+            </div>
+            <div class="result-wrap" style="margin-top: 10px">
+              <div class="embed-raw" style="border-radius: 4px">
+                <div class="embed-raw-label">PROMPT</div>
+                <pre
+                  class="embed-code"
+                  style="
+                    font-size: 0.72rem;
+                    line-height: 1.75;
+                    max-height: 320px;
+                    overflow-y: auto;
+                  "
+                >
+당신은 디지털 마케팅 엑셀 보고서에서 캠페인의 요약 정보를 추출하는 데이터 분석가입니다.
+
+입력으로는 다음 정보가 제공됩니다.
+1. BLOCK_MACRO: 캠페인 엑셀 시트에서 추출한 요약 영역의 row list
+2. FILE_NAME: 엑셀 파일명
+3. FILE_YEAR: 엑셀 파일의 작성 추정 연도 (추정값이므로 명시된 연도가 있으면 우선 사용)
+
+당신의 임무는 BLOCK_MACRO와 FILE_NAME, FILE_YEAR을 참고하여 캠페인 정보를 정해진 스키마로 구조화하는 것입니다.
+
+[추출 대상]
+- advertiser
+- file_date
+- campaign_name
+- campaign_start
+- campaign_end
+
+[정보 추출 우선순위]
+1. BLOCK_MACRO 내 명시 정보
+2. FILE_NAME 내 명시 정보
+3. BLOCK_MACRO 또는 FILE_NAME 내 문맥상 강한 힌트
+
+[공통 규칙]
+- 정의된 스키마 외의 필드는 절대 생성하지 마세요.
+- 정보를 찾을 수 없으면 빈 문자열 ''을 반환하세요.
+- 추측이 약한 값은 생성하지 마세요.
+- subtotal, total, grand total, 합계, 총계 등 요약 행은 캠페인 정보로 사용하지 마세요.
+
+[중요 규칙: advertiser]
+- advertiser는 광고주, 브랜드, 클라이언트 이름입니다.
+- BLOCK_MACRO 내 "광고주", "Advertiser", "Client", "Brand" 등의 명시 라벨이 있으면 최우선으로 사용하세요.
+- 수행사, 대행사, 매체사, 플랫폼명, 내부 팀명은 advertiser로 사용하지 마세요.
+  예: DMC, 디엠씨미디어, agency, media agency, platform
+- 명시 라벨이 없더라도 campaign_name 또는 FILE_NAME에 브랜드/서비스명으로 보이는 고유명사가 있으면 advertiser 후보로 사용할 수 있습니다.
+- 단, media mix, campaign, report, plan, proposal, sheet, final, version 등 일반 문서어는 advertiser에 포함하지 마세요.
+- 광고주명이 영문과 국문 둘 다 있으면 국문을 우선하세요.
+  예: "Kia / 기아" -> "기아"
+- FILE_NAME에서 추출 시 괄호 안 대행사 표기는 제외하세요.
+  예: "(DMC)기아대책_..." -> 대행사 "(DMC)" 제외
+
+[중요 규칙: campaign_name]
+- campaign_name은 실제 디지털 광고 집행 캠페인명을 의미합니다.
+- 파일명 전체를 그대로 복사하지 마세요.
+- 가능하면 실제 캠페인처럼 보이는 핵심 명사구만 짧게 추출하세요.
+- campaign_name은 가능하면 "OOO 캠페인" 형식으로 정규화하세요.
+- 단, 명확한 캠페인명이 없으면 억지로 만들지 말고 ''을 반환하세요.
+- 다음 문서성 단어는 campaign_name에서 제거하세요:
+  media mix, mediamix, mix, report, reporting, plan, proposal, sheet, final, v1, v2, version
+- 연도/월/버전/문서종류만 남는 경우는 campaign_name으로 보지 마세요.
+- 광고주명 단독만 있는 경우도 campaign_name으로 보지 마세요.
+- 예:
+  - "2025 Kpop-ON PGS Campaign Mediamix" -> "2025 Kpop-ON PGS 캠페인"
+  - "My Spotify Campaign Media Mix" -> "My Spotify 캠페인"
+  - "2024 Media Mix Final" -> ""
+
+[중요 규칙: file_date]
+- file_date는 파일 작성일 또는 문서 기준일입니다.
+- 반드시 YYYY-MM-DD 형식으로 반환하세요.
+- 연도 결정 우선순위:
+  1. BLOCK_MACRO 또는 FILE_NAME에 명시된 연도
+  2. FILE_NAME 끝 날짜 패턴 (예: _240130 -> "2024-01-30")
+  3. FILE_YEAR
+- 날짜를 찾을 수 없으면 ''을 반환하세요.
+
+[중요 규칙: campaign_start, campaign_end]
+- campaign_start는 광고 집행 시작일입니다.
+- campaign_end는 광고 집행 종료일입니다.
+- 반드시 YYYY-MM-DD 형식으로 반환하세요.
+- 연도 결정 우선순위:
+  1. BLOCK_MACRO 또는 FILE_NAME에 명시된 연도
+  2. FILE_YEAR
+- 해가 바뀌는 경우, 시작월보다 종료월이 작으면 종료일 연도는 FILE_YEAR+1로 처리하세요.
+- 집행기간이 여러 개 있을 경우 가장 넓은 범위를 사용하세요.
+  예: "1/1~1/15", "1/16~1/31" -> start: "2024-01-01", end: "2024-01-31"
+- "상시", "미정", "TBD" 등은 ''로 처리하세요.
+- 월 단위만 있는 경우 해당 월 전체 기간으로 변환하세요.
+  - "11월" + FILE_YEAR=2024 -> campaign_start: "2024-11-01", campaign_end: "2024-11-30"
+  - "2월" + FILE_YEAR=2024 -> campaign_start: "2024-02-01", campaign_end: "2024-02-28"
+- 종료일을 알 수 없으면 campaign_end는 ''을 반환하세요.
+- 시작일을 알 수 없으면 campaign_start는 ''을 반환하세요.
+- 윤년 여부는 고려하지 말고 2월 종료일은 항상 "YYYY-02-28"로 처리하세요.</pre
+                >
+              </div>
+              <div class="result-arrow">→</div>
+              <div class="parse-panel">
+                <div class="parse-panel-label">OUTPUT — 캠페인 메타</div>
+                <pre class="parse-code">{
+  <span class="pc-key">"advertiser"</span>: <span class="pc-str">"노랑통닭"</span>,
+  <span class="pc-key">"campaign_name"</span>:
+    <span class="pc-str">"노랑통닭 신메뉴
+     Two 콤비네이션 캠페인"</span>,
+  <span class="pc-key">"campaign_start"</span>:
+    <span class="pc-str">"2025-06-01"</span>,
+  <span class="pc-key">"campaign_end"</span>:
+    <span class="pc-str">"2025-06-30"</span>
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="proc-step">
+          <div class="proc-spine">
+            <div class="proc-num">07</div>
+            <div class="proc-line"></div>
+          </div>
+          <div class="proc-body">
+            <div class="proc-title">미디어 믹스 별 업종 분류</div>
+            <div class="proc-desc">
+              광고주별 업종을 LLM으로 1Depth · 2Depth 분류 — 생소한 브랜드는
+              Tavily
+              <img
+                src="statics/tavily-logo.png"
+                class="badge-logo"
+                alt="Tavily"
+              />
+              Tavily 웹검색을 연동해 사업 내용 확인 후 판단
+            </div>
+            <div class="proc-meta">
+              <span class="proc-tag proc-tag--llm">OpenAI Tool Use</span>
+              <span class="proc-tag proc-tag--llm"
+                ><img
+                  src="statics/tavily-logo.png"
+                  class="badge-logo"
+                  alt="Tavily"
+                />
+                Tavily 웹검색</span
+              >
+              <span class="proc-tag proc-tag--lang">Python</span>
+              <span class="proc-tag proc-tag--lang">OpenAI</span>
+              <span class="proc-tag proc-tag--lang">LangChain</span>
+              <span class="proc-tag proc-tag--lang">BigQuery</span>
+            </div>
+            <div class="result-wrap" style="margin-top: 10px">
+              <div class="embed-raw" style="border-radius: 4px">
+                <div class="embed-raw-label">PROMPT</div>
+                <pre
+                  class="embed-code"
+                  style="
+                    font-size: 0.72rem;
+                    line-height: 1.75;
+                    max-height: 320px;
+                    overflow-y: auto;
+                  "
+                >
+당신은 광고 업종 분류 전문가입니다.
+광고주명과 캠페인 파일 힌트를 보고 아래 업종분류 사전 기준으로 산업군을 분류하세요.
+
+[업종분류 사전]
+{industry_json}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[사용 가능한 depth1 - 반드시 이 목록에서만 선택]
+{depth1_list}
+
+[분류 절차 - 반드시 순서대로 수행]
+1. 위 depth1 목록을 전체 검토
+2. 광고주 사업과 가장 가까운 depth1 선택
+3. 선택한 depth1의 depth2 목록에서 가장 적합한 값 선택
+4. 업종분류 사전에 없는 값 절대 사용 금지
+
+[공공기관 판단 기준]
+광고주명에 아래 키워드 포함 시 → depth1="공공/단체", depth2="비영리기관" 우선 고려
+- "공단", "공사", "진흥원", "연구원", "협회", "재단", "위원회", "기관", "청", "원"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[캠페인 파일 힌트 활용]
+- 캠페인 파일 힌트가 제공되면 광고주명 판단의 보조 근거로 사용
+- 파일명에 제품명/서비스명/캠페인 주제가 명시된 경우 업종 판단에 적극 활용
+- 파일명이 날짜, 보고서 등 노이즈만 남은 경우 무시
+
+예시:
+- 광고주: "빌리프랩" / 힌트: "ENHYPEN 미니 5집 발매 프로모션" -> 아이돌 연계 화장품 브랜드 확신 -> 미용/생활용품 / 화장품
+- 광고주: "LENOVO" / 힌트: "ISG Maveric eDM" -> B2B IT 서버 제품 -> 전자/가전 / 컴퓨터/주변기기 + ICT / ICT 기기/시스템
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[web_search 사용 기준]
+- 광고주명 + 파일 힌트만으로 업종 판단이 가능하면 검색하지 마세요
+- 다음 경우에만 검색하세요:
+  1. 생소한 브랜드명 / 약어 / 영문 조합
+  2. 업종이 여러 개로 추측되어 확인이 필요한 경우
+  3. 한국 로컬 브랜드/기관명으로 판단이 어려운 경우
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[분류 규칙]
+- depth1, depth2는 업종분류 사전에 존재하는 값만 사용
+- 동일한 depth1-depth2 조합 중복 금지
+- 가능성 높은 순서로 정렬
+- 개수: 최소 1개, 최대 5개
+
+[개수 선택 기준]
+- 1개: 사업 영역이 명확히 하나인 경우
+- 2~3개: 복수 사업 영역이 확인되는 경우
+- 4~5개: 대형 복합 기업 / 플랫폼 사업자
+- 불필요하게 많이 선택하지 말 것
+
+["그 외 ..." 사용 기준]
+- 더 구체적인 업종이 없을 때만 사용
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[출력 규칙]
+- JSON only, 설명 금지
+- advertiser는 입력값 그대로 반환
+- reason은 10자 이내
+
+{
+  "advertiser": "...",
+  "industries": [
+    {"depth1": "...", "depth2": "..."}
+  ],
+  "reason": "..."
+}</pre
+                >
+              </div>
+              <div class="result-arrow">→</div>
+              <div class="parse-panel">
+                <div class="parse-panel-label">OUTPUT — 업종 분류</div>
+                <pre class="parse-code">{
+  <span class="pc-key">"advertiser"</span>: <span class="pc-str">"노랑통닭"</span>,
+  <span class="pc-key">"ind_depth1"</span>: [
+    <span class="pc-str">"식품/음료"</span>
+  ],
+  <span class="pc-key">"ind_depth2"</span>: [
+    <span class="pc-str">"식품/음료 -
+     식당/외식프랜차이즈"</span>
+  ],
+  <span class="pc-key">"reason"</span>: <span class="pc-str">"치킨프랜차이즈"</span>
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="proc-step proc-step--last">
+          <div class="proc-spine">
+            <div class="proc-num">08</div>
+          </div>
+          <div class="proc-body">
+            <div class="proc-title">파이프라인 처리 결과</div>
+            <div class="proc-desc">
+              00~07 단계 전체 파이프라인을 통과한 최종 구조화 데이터 적재 수량
+            </div>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1fr auto 1fr auto 1fr;
+                align-items: center;
+                gap: 0;
+                margin-top: 12px;
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                overflow: hidden;
+              "
+            >
+              <div
+                style="
+                  padding: 16px 18px;
+                  background: var(--surface-raised);
+                  text-align: center;
+                "
+              >
+                <div
+                  style="
+                    font-family: var(--font-headline);
+                    font-size: 1.6rem;
+                    font-weight: 800;
+                    color: var(--text);
+                    line-height: 1;
+                  "
+                >
+                  4,753
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-data);
+                    font-size: 0.62rem;
+                    color: var(--text-tertiary);
+                    margin-top: 4px;
+                    letter-spacing: 0.04em;
+                  "
+                >
+                  건 수집
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-body);
+                    font-size: 0.72rem;
+                    color: var(--text-secondary);
+                    margin-top: 6px;
+                  "
+                >
+                  전체 엑셀 보고서
+                </div>
+              </div>
+              <div
+                style="
+                  padding: 0 14px;
+                  background: var(--surface);
+                  border-left: 1px solid var(--border);
+                  border-right: 1px solid var(--border);
+                  height: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 3px;
+                "
+              >
+                <div style="font-size: 1rem; color: var(--text-tertiary)">
+                  →
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-data);
+                    font-size: 0.62rem;
+                    color: var(--accent);
+                    font-weight: 600;
+                  "
+                >
+                  74.9%
+                </div>
+              </div>
+              <div
+                style="
+                  padding: 16px 18px;
+                  background: var(--surface-raised);
+                  text-align: center;
+                "
+              >
+                <div
+                  style="
+                    font-family: var(--font-headline);
+                    font-size: 1.6rem;
+                    font-weight: 800;
+                    color: var(--text);
+                    line-height: 1;
+                  "
+                >
+                  3,558
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-data);
+                    font-size: 0.62rem;
+                    color: var(--text-tertiary);
+                    margin-top: 4px;
+                    letter-spacing: 0.04em;
+                  "
+                >
+                  건 감지
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-body);
+                    font-size: 0.72rem;
+                    color: var(--text-secondary);
+                    margin-top: 6px;
+                  "
+                >
+                  미디어믹스 시트 포함
+                </div>
+              </div>
+              <div
+                style="
+                  padding: 0 14px;
+                  background: var(--surface);
+                  border-left: 1px solid var(--border);
+                  border-right: 1px solid var(--border);
+                  height: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 3px;
+                "
+              >
+                <div style="font-size: 1rem; color: var(--text-tertiary)">
+                  →
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-data);
+                    font-size: 0.62rem;
+                    color: var(--accent);
+                    font-weight: 600;
+                  "
+                >
+                  96.9%
+                </div>
+              </div>
+              <div
+                style="
+                  padding: 16px 18px;
+                  background: var(--accent-muted);
+                  text-align: center;
+                "
+              >
+                <div
+                  style="
+                    font-family: var(--font-headline);
+                    font-size: 1.6rem;
+                    font-weight: 800;
+                    color: var(--accent);
+                    line-height: 1;
+                  "
+                >
+                  3,448 (72.5%)
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-data);
+                    font-size: 0.62rem;
+                    color: var(--accent);
+                    margin-top: 4px;
+                    letter-spacing: 0.04em;
+                    opacity: 0.7;
+                  "
+                >
+                  건 완료
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-body);
+                    font-size: 0.72rem;
+                    color: var(--text-secondary);
+                    margin-top: 6px;
+                  "
+                >
+                  구조화 적재 완료
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection" id="s4-2">
+    <div class="subsection-title" style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+      4-2. 데모 시스템 개발
+      <span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 400; font-size: 0.75rem; background: var(--surface-raised); border: 1px solid var(--border); border-radius: 4px; padding: 3px 10px 3px 7px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+        <img src="statics/logo.svg" width="14" height="14" alt="Mixpedia" style="flex-shrink: 0; opacity: 0.85;" />
+        <a
+          href="https://mixpedia-50799312352.asia-northeast3.run.app/login"
+          target="_blank"
+          rel="noopener"
+          style="font-family: var(--font-data); font-size: 0.72rem; color: var(--accent); text-decoration: none; font-weight: 600;"
+        >데모 시스템 ↗</a>
+        <span style="width: 1px; height: 12px; background: var(--border); display: inline-block;"></span>
+        <span style="font-family: var(--font-data); font-size: 0.68rem; color: var(--text-tertiary);">ID</span>
+        <code style="font-family: var(--font-data); font-size: 0.72rem; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; color: var(--text); font-weight: 400;">mixpedia@dmcmedia.co.kr</code>
+        <span style="font-family: var(--font-data); font-size: 0.68rem; color: var(--text-tertiary);">PW</span>
+        <code style="font-family: var(--font-data); font-size: 0.72rem; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; color: var(--text); font-weight: 400;">mixpedia1!</code>
+      </span>
+    </div>
+    <div class="grid-wrap">
+      <div class="ai-callout">
+        <p class="ai-callout-lead">
+          구조화 데이터셋 및 벡터 스토어를 서비스로 연결하는 백엔드 API와
+          프론트엔드를
+          <span class="hl">Claude Code 바이브코딩으로 구현</span>
+        </p>
+        <ul class="ai-bullets">
+          <li>
+            <strong>백엔드 (FastAPI)</strong> — 벡터 유사도 검색·필터 조건
+            처리·집계 쿼리 엔드포인트 제공, 데이터컨설팅팀 MMM 모듈 통합
+          </li>
+          <li>
+            <strong>프론트엔드 (React · Vite)</strong> — Claude Code와의 대화로
+            컴포넌트·API 연동·시각화 레이어를 단계적으로 구현, 별도 프론트엔드
+            인력 없이 AI 도구만으로 완성
+          </li>
+          <li>
+            상세 시스템 아키텍처는
+            <a
+              href="#appendix-1"
+              style="
+                color: var(--accent);
+                text-decoration: none;
+                font-weight: 600;
+              "
+              >Appendix #1</a
+            >을 참고
+          </li>
+        </ul>
+        <div
+          style="
+            margin-top: 12px;
+            padding: 12px 14px;
+            background: var(--surface-raised);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 10px">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              style="
+                width: 15px;
+                height: 15px;
+                flex-shrink: 0;
+                color: var(--accent);
+              "
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path
+                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+              />
+            </svg>
+            <span
+              style="
+                font-family: var(--font-body);
+                font-size: 0.8rem;
+                color: var(--text-secondary);
+              "
+              >데모 시스템</span
+            >
+            <a
+              href="https://mixpedia-50799312352.asia-northeast3.run.app/login"
+              target="_blank"
+              rel="noopener"
+              style="
+                font-family: var(--font-data);
+                font-size: 0.75rem;
+                color: var(--accent);
+                text-decoration: none;
+              "
+            >
+              https://mixpedia-50799312352.asia-northeast3.run.app/login
+            </a>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 16px;
+              padding-left: 25px;
+            "
+          >
+            <div style="display: flex; align-items: center; gap: 6px">
+              <span
+                style="
+                  font-family: var(--font-data);
+                  font-size: 0.68rem;
+                  color: var(--text-tertiary);
+                  width: 24px;
+                "
+                >ID</span
+              >
+              <code
+                style="
+                  font-family: var(--font-data);
+                  font-size: 0.75rem;
+                  background: var(--surface);
+                  border: 1px solid var(--border);
+                  border-radius: 3px;
+                  padding: 2px 8px;
+                  color: var(--text);
+                "
+                >mixpedia@dmcmedia.co.kr</code
+              >
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px">
+              <span
+                style="
+                  font-family: var(--font-data);
+                  font-size: 0.68rem;
+                  color: var(--text-tertiary);
+                  width: 24px;
+                "
+                >PW</span
+              >
+              <code
+                style="
+                  font-family: var(--font-data);
+                  font-size: 0.75rem;
+                  background: var(--surface);
+                  border: 1px solid var(--border);
+                  border-radius: 3px;
+                  padding: 2px 8px;
+                  color: var(--text);
+                "
+                >mixpedia1!</code
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px">
+        <div>
+          <div
+            style="
+              font-family: var(--font-body);
+              font-size: 0.75rem;
+              font-weight: 600;
+              color: var(--text-secondary);
+              margin-bottom: 6px;
+            "
+          >
+            미디어 믹스 조회 — 캠페인 검색 &amp; 필터
+          </div>
+          <img
+            src="statics/mix-search.png"
+            alt="미디어 믹스 조회"
+            style="
+              display: block;
+              width: 100%;
+              border: 1px solid var(--border);
+              border-radius: 4px;
+            "
+          />
+        </div>
+        <div>
+          <div
+            style="
+              font-family: var(--font-body);
+              font-size: 0.75rem;
+              font-weight: 600;
+              color: var(--text-secondary);
+              margin-bottom: 6px;
+            "
+          >
+            미디어 믹스 상세 — 캠페인 구성 &amp; 유사 추천
+          </div>
+          <img
+            src="statics/mix-detail.png"
+            alt="미디어 믹스 상세"
+            style="
+              display: block;
+              width: 100%;
+              border: 1px solid var(--border);
+              border-radius: 4px;
+            "
+          />
+        </div>
+        <div>
+          <div
+            style="
+              font-family: var(--font-body);
+              font-size: 0.75rem;
+              font-weight: 600;
+              color: var(--text-secondary);
+              margin-bottom: 6px;
+            "
+          >
+            매체 인사이트 — 집행 트렌드 &amp; 연관 캠페인
+          </div>
+          <img
+            src="statics/media-detail.png"
+            alt="매체 인사이트"
+            style="
+              display: block;
+              width: 100%;
+              border: 1px solid var(--border);
+              border-radius: 4px;
+            "
+          />
+        </div>
+      </div>
+
+      <div class="ai-callout">
+        <p class="ai-callout-lead">
+          데이터컨설팅팀이 연구/구축 중인
+          <span class="hl">MMM (Marketing Mix Model) 모듈</span>이 통합
+        </p>
+        <ul class="ai-bullets">
+          <li>
+            <strong>MMM이란</strong>매체별 광고비 집행과 매출·전환 성과 간의
+            관계를 Regression ML 모델로 정량화하는 마케팅 효과 측정 방법론<br />예)
+            Google Meridian, Meta Robyn 등
+          </li>
+          <li>
+            광고 집행 후 효과가 잔존·감소하는 이월 효과(Ad-Stock)와, 일정 수준
+            이상 집행 시 추가 효과가 줄어드는 포화 효과(Ad-Saturation)를 모두
+            반영하여 매체별 기여도를 추정
+          </li>
+        </ul>
+        <div
+          style="
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: var(--surface-raised);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            style="
+              width: 15px;
+              height: 15px;
+              flex-shrink: 0;
+              color: var(--accent);
+            "
+          >
+            <path
+              d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+            />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+          </svg>
+          <span
+            style="
+              font-family: var(--font-body);
+              font-size: 0.8rem;
+              color: var(--text-secondary);
+            "
+            >MMM 연구/구축 상세 내용</span
+          >
+          <a
+            href="https://drive.google.com/file/d/1UWUWg7D1_IfAnyJGaFbfdEZEAMNzuFKQ/view?usp=drive_link"
+            target="_blank"
+            rel="noopener"
+            style="
+              font-family: var(--font-data);
+              font-size: 0.75rem;
+              color: var(--accent);
+              text-decoration: none;
+              display: inline-flex;
+              align-items: center;
+              gap: 4px;
+            "
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              style="width: 13px; height: 13px; flex-shrink: 0"
+            >
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+            </svg><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              style="width: 12px; height: 12px; flex-shrink: 0"
+            >
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+              </svg></a
+            >
+        </div>
+      </div>
+      <div
+        style="
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+          margin-top: 4px;
+        "
+      >
+        <div>
+          <div
+            style="
+              font-family: var(--font-body);
+              font-size: 0.75rem;
+              font-weight: 600;
+              color: var(--text-secondary);
+              margin-bottom: 6px;
+            "
+          >
+            모델 생성 — 데이터·변수 설정 및 모델 생성
+          </div>
+          <img
+            src="statics/mmm-create.png"
+            alt="MMM 모델 생성"
+            style="
+              display: block;
+              width: 100%;
+              border: 1px solid var(--border);
+              border-radius: 4px;
+            "
+          />
+        </div>
+        <div>
+          <div
+            style="
+              font-family: var(--font-body);
+              font-size: 0.75rem;
+              font-weight: 600;
+              color: var(--text-secondary);
+              margin-bottom: 6px;
+            "
+          >
+            모델 확인 — 매체별 기여도 분석 결과
+          </div>
+          <img
+            src="statics/mmm-detail.png"
+            alt="MMM 모델 확인"
+            style="
+              display: block;
+              width: 100%;
+              border: 1px solid var(--border);
+              border-radius: 4px;
+            "
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
