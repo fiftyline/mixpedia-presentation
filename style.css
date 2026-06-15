@@ -269,7 +269,7 @@ body {
 }
 
 .section {
-  margin-bottom: 52px;
+  margin-bottom: 120px;
 }
 
 .section-header {
@@ -627,7 +627,7 @@ p:last-child {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 40px 48px;
+  padding: 120px 120px;
   background-image:
     repeating-linear-gradient(
       0deg,
@@ -644,7 +644,7 @@ p:last-child {
 }
 
 .need-left {
-  background: var(--surface);
+  background: var(--surface-raised);
   border-radius: 6px;
   padding: 36px 28px;
   display: flex;
@@ -655,14 +655,14 @@ p:last-child {
 }
 
 .need-excel-icon {
-  width: 72px;
-  height: 72px;
+  width: 160px;
+  height: 160px;
   object-fit: contain;
 }
 
 .need-left-body {
   font-family: var(--font-body);
-  font-size: 0.925rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.8;
   margin: 0;
@@ -677,13 +677,13 @@ p:last-child {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 32px;
   text-align: center;
 }
 
 .need-problem {
   font-family: var(--font-body);
-  font-size: 0.925rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.8;
   margin: 0;
@@ -697,15 +697,15 @@ p:last-child {
 
 .need-conclusion {
   font-family: var(--font-body);
-  font-size: 0.925rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.8;
   margin: 0;
 }
 
 .need-conclusion-accent {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.2rem;
+  font-weight: 800;
 }
 
 .hl {
@@ -765,7 +765,7 @@ p:last-child {
 }
 
 .ai-callout .ai-bullets li {
-  color: var(--accent-muted-text);
+  color: var(--text-secondary);
 }
 
 .ai-bullets li::before {
@@ -805,11 +805,11 @@ p:last-child {
 .limit-wrap {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 60px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 40px 48px;
+  padding: 120px 120px;
   background-image:
     repeating-linear-gradient(
       0deg,
@@ -827,8 +827,8 @@ p:last-child {
 
 .limit-intro {
   font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 800;
   color: var(--text);
   line-height: 1.7;
   text-align: center;
@@ -890,9 +890,9 @@ p:last-child {
 
 .limit-gap-label {
   font-family: var(--font-body);
-  font-size: 0.925rem;
-  font-weight: 700;
-  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #f02626;
 }
 
 .limit-gap-tags {
@@ -906,7 +906,7 @@ p:last-child {
   display: inline-block;
   padding: 5px 14px;
   background: transparent;
-  border: 1.5px dashed var(--accent);
+  border: 1.5px dashed #c9c9c9;
   border-radius: 3px;
   font-family: var(--font-body);
   font-size: 0.825rem;
@@ -917,7 +917,7 @@ p:last-child {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 56px 40px;
+  padding: 150px 40px;
   text-align: center;
   background-image:
     repeating-linear-gradient(
@@ -1116,7 +1116,6 @@ p:last-child {
   grid-template-columns: 1fr 48px 1fr;
   gap: 0;
   align-items: stretch;
-  border: 1px solid var(--border);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -1150,23 +1149,21 @@ p:last-child {
 }
 
 .embed-arrow-col {
-  background: var(--surface-raised);
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .embed-arrow {
-  font-size: 1.4rem;
+  font-size: 2rem;
   color: var(--accent);
   font-family: var(--font-body);
-  line-height: 1;
+  line-height: 4;
 }
 
 .embed-natural {
   background: var(--surface);
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
 }
@@ -1403,7 +1400,6 @@ p:last-child {
   align-items: center;
   justify-content: center;
   gap: 0;
-  border: 1px solid var(--border);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -1417,11 +1413,9 @@ p:last-child {
   padding: 24px 20px;
   background: var(--surface-raised);
   text-align: center;
+  border: 1px solid var(--border);
 }
 
-.vp-step:not(:first-child) {
-  border-left: 1px solid var(--border);
-}
 
 .vp-step-icon {
   width: 36px;
@@ -1472,9 +1466,6 @@ p:last-child {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--surface);
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
   self-align: stretch;
   font-size: 1.2rem;
   color: var(--text-tertiary);
