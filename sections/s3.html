@@ -1,300 +1,94 @@
 <section class="section" id="s3">
   <div class="section-header">
     <span class="section-number">03</span>
-    <h2 class="section-title">AI 활용 내용</h2>
+    <h2 class="section-title">AI 활용의 필요성</h2>
     <div class="section-divider"></div>
   </div>
 
   <div class="subsection" id="s3-1">
-    <div class="subsection-title">3-1. LLM 기반 미디어 믹스 데이터 구조화</div>
-
+    <div class="subsection-title">
+      3-1. 규격화되지 않은 컬럼명
+    </div>
     <div class="grid-wrap">
-      <div class="ai-callout">
-        <p class="ai-callout-lead">
-          미디어믹스 보고서 엑셀 파일은 규칙 기반 및 일반적인 접근 방법으로는
-          <span class="hl">구조화하기 매우 어려운</span>, 정형 데이터처럼 보이는
-          <span class="hl">비정형 데이터</span>
-        </p>
-        <ul class="ai-bullets">
-          <li>
-            <strong>포맷 비표준</strong> — 파일마다 컬럼명, 헤더 위치, 시트
-            구성이 다름
-          </li>
-          <li>
-            <strong>언어 혼존</strong> — 한국어·영어가 섞인 컬럼명과 약어<span
-              class="ai-note"
-              >(예: P2539, 여성 20대 ~ 30대 등)</span
-            >
-          </li>
-          <li>
-            <strong>맥락 의존적 해석</strong> — 같은 값이라도 컬럼 위치와 주변
-            맥락에 따라 의미가 달라짐
-            <span class="ai-note"
-              >(예: Product는 광고·상품? 혹은 캠페인 대상 판매 제품?)</span
-            >
-          </li>
-        </ul>
-      </div>
-
-      <div class="llm-pipeline-header">
-        <span class="llm-pipeline-brand">OpenAI</span>
-        LLM 구조화 파이프라인
-        <span class="ai-note">· Batch API · Structured Output · Tool Use</span>
-      </div>
-
-      <div class="llm-pipeline">
-        <div class="llm-step">
-          <div class="llm-step-num">01</div>
-          <div class="llm-step-title">컬럼 역할 분류</div>
-          <div class="llm-step-desc">
-            파일마다 다른 컬럼 구조를 LLM이 역할별로 분류 — 헤더 위치·컬럼명
-            비표준 문제 해결
+      <div class="ai-need-grid">
+        <div class="ai-need-card">
+          <div class="ai-need-copy">
+            <div class="ai-need-label">담당자, 광고주 등 조건에 따라 다르게 작성된 컬럼명</div>
+            <p class="ai-need-desc">
+              규칙 기반 매핑만으로는 컬럼명의 일관된 구조화가 어려움
+            </p>
           </div>
-          <div class="llm-step-badges">
-            <span class="llm-badge">Batch API</span>
-            <span class="llm-badge">Structured Output</span>
-          </div>
-        </div>
-        <div class="llm-step">
-          <div class="llm-step-num">02</div>
-          <div class="llm-step-title">미디어 믹스 상세 추출</div>
-          <div class="llm-step-desc">
-            광고주·매체·예산·기간 등 핵심 캠페인 정보를 일관된 스키마로 추출
-          </div>
-          <div class="llm-step-badges">
-            <span class="llm-badge">Batch API</span>
-            <span class="llm-badge">Structured Output</span>
-          </div>
-        </div>
-        <div class="llm-step">
-          <div class="llm-step-num">03</div>
-          <div class="llm-step-title">타겟팅 · 디바이스 · 기간 추출</div>
-          <div class="llm-step-desc">
-            행별 세부 타겟팅 조건, 디바이스, 집행 기간 파싱 — 맥락 의존적 값
-            처리
-          </div>
-          <div class="llm-step-badges">
-            <span class="llm-badge">Batch API</span>
-            <span class="llm-badge">Structured Output</span>
-          </div>
-        </div>
-        <div class="llm-step">
-          <div class="llm-step-num">04</div>
-          <div class="llm-step-title">광고주 업종 분류</div>
-          <div class="llm-step-desc">
-            LLM 단독 판단이 어려운 생소한 브랜드는 웹 검색 Tool을 연동하여 업종
-            판단
-          </div>
-          <div class="llm-step-badges">
-            <span class="llm-badge llm-badge--tool">Tool Use</span>
-            <span class="llm-badge llm-badge--tool"
-              ><img
-                src="statics/tavily-logo.png"
-                class="badge-logo"
-                alt="Tavily"
-              />
-              Tavily 웹검색</span
-            >
-          </div>
+          <img
+            src="statics/3-1-a.png"
+            alt="영어 컬럼명 예시"
+            class="ai-need-img"
+          />
+          <img
+            src="statics/3-1-b.png"
+            alt="한글 컬럼명 예시"
+            class="ai-need-img"
+          />
         </div>
       </div>
     </div>
   </div>
 
   <div class="subsection" id="s3-2">
-    <div class="subsection-title">
-      3-2. LLM 기반 미디어믹스 데이터 임베딩 및 벡터 스토어 구축
-    </div>
+    <div class="subsection-title">3-2. 병합셀</div>
     <div class="grid-wrap">
-      <div class="ai-callout">
-        <p class="ai-callout-lead">
-          LLM기반의 미디어 믹스 구조화 데이터를 시스템에서
-          <span class="hl">검색/조회해 활용 가능하게 재구성</span>
-        </p>
-        <ul class="ai-bullets">
-          <li>
-            구조화 데이터가 적재된 Google Cloud Platform 환경의 BigQuery에
-            Google Vertex AI 다국어 임베딩 원격 모델 객체 생성
-            <span class="ai-note">(text-multilingual-embedding-002)</span>
-          </li>
-          <li>
-            LLM이 출력한 구조화된 원시 데이터를 그대로 사용하는 것이 아닌,
-            <span class="hl">캠페인 정보 요약 관점의 자연어로 변환</span>
-          </li>
-          <li>
-            자연어로 변환한 데이터를 임베딩 후 별도 데이터셋으로 적재 →
-            <span class="hl">벡터 스토어</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="embed-transform">
-        <div class="embed-raw">
-          <div class="embed-raw-label">JSON 구조</div>
-          <pre class="embed-code">
-{
-  "advertiser": "브랜드명",
-  "file_id": "4560",
-  "file_path": "브랜드명_10월_캠페인_Daily_Report_1101.xlsx",
-  "campaign_name": "브랜드명 1월 캠페인",
-  "medias": ["Youtube", "인스타그램",
-     "틱톡", "카카오 모먼트"],
-  "budget_sum": "86000000",
-  "ind_depth1": ["식음/음료"],
-  "ind_depth2": ["음료/식품판매"],
-  "campaign_start": "2024-10-31T00:00:00",
-  "campaign_end":   "2024-10-31T00:00:00",
-  "target_age_min": "20",
-  "target_age_max": "39"
-}</pre
-          >
+      <div class="ai-need-card">
+        <div class="ai-need-copy">
+          <div class="ai-need-label">행 단위 데이터로 풀었을 때 의미가 끊기는 병합 구조</div>
+          <p class="ai-need-desc">
+            미디어믹스 표는 사람이 보기 좋도록 여러 행에 공통으로 적용되는 값이 병합셀로 작성되는 경우가 많음.
+          </p>
         </div>
-        <div class="embed-arrow-col">
-          <div class="embed-arrow">→</div>
-        </div>
-        <div class="embed-natural">
-          <div class="embed-natural-label">자연어 변환 (정보 요약)</div>
-          <div class="embed-nl-body">
-            광고주 : 노랑통닭<br />
-            캠페인 : 갈릭인더딥 10월 캠페인<br />
-            파일명 : 노랑통닭_갈릭인더딥 10월 캠페인_Daily Report_1101.xlsx<br />
-            매체 : Youtube, 인스타그램, 타겟팅게이츠, 카카오 모먼트<br />
-            업종1 : 식품/음료 업종2 : 식품/음료 - 식당/외식프랜차이즈<br />
-            타겟성별 : 남성 여성 공통<br />
-            타겟연령 : 7세부터 79세까지<br />
-          </div>
-        </div>
-      </div>
-
-      <div class="vector-pipeline">
-        <div class="vp-step">
-          <div class="vp-step-icon">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-            >
-              <path
-                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-              />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="16" y1="13" x2="8" y2="13" />
-              <line x1="16" y1="17" x2="8" y2="17" />
-            </svg>
-          </div>
-          <div class="vp-step-label">자연어 변환</div>
-          <div class="vp-step-sub">캠페인 정보 요약 텍스트</div>
-        </div>
-        <div class="vp-arrow-col">→</div>
-        <div class="vp-step">
-          <div class="vp-step-logo">
-            <img src="statics/gemini-logo.png" alt="Gemini" class="vp-logo" />
-          </div>
-          <div class="vp-step-label">임베딩</div>
-          <div class="vp-step-sub">text-multilingual-embedding-002</div>
-        </div>
-        <div class="vp-arrow-col">→</div>
-        <div class="vp-step">
-          <div class="vp-step-icon">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-            >
-              <ellipse cx="12" cy="5" rx="9" ry="3" />
-              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-            </svg>
-          </div>
-          <div class="vp-step-label">벡터 스토어</div>
-          <div class="vp-step-sub">BigQuery Dataset</div>
-        </div>
+        <img
+          src="statics/3-2.png"
+          alt="병합셀로 구성된 미디어믹스 테이블 예시"
+          class="ai-need-img"
+        />
       </div>
     </div>
   </div>
 
   <div class="subsection" id="s3-3">
-    <div class="subsection-title">3-3. 바이브코딩 활용 데모 시스템 개발</div>
+    <div class="subsection-title">3-3. 노이즈</div>
     <div class="grid-wrap">
-      <div class="ai-callout">
-        <p class="ai-callout-lead">
-          구조화 데이터셋 및 벡터 스토어 구축 완료 후, 이를 서비스로 연결하는
-          백엔드 API와 프론트엔드를 개발 —
-          <span class="hl"
-            >프론트엔드 전체는 Claude Code 바이브코딩으로 구현</span
-          >하여 AI 기반 소프트웨어 개발 방식을 프로젝트 내에서 직접 실증
-        </p>
+      <div class="ai-need-card">
+        <div class="ai-need-copy">
+          <div class="ai-need-label">미디어믹스 시트에 섞여 있는 메모·참고사항·부가 조건</div>
+          <p class="ai-need-desc">
+            미디어믹스 시트로 분류된 파일이라도 실제 시트 안에는 가격 방식, 노출 보장 조건, 집행 유의사항,
+            담당자 메모처럼 구조화 대상이 아닌 정보가 함께 포함되는 경우가 많음.
+          </p>
+        </div>
+        <img
+          src="statics/3-3.png"
+          alt="미디어믹스 시트 내 메모와 참고사항 노이즈 예시"
+          class="ai-need-img"
+        />
       </div>
+    </div>
+  </div>
 
-      <div class="vibe-stack">
-        <div class="vibe-step">
-          <div class="vibe-step-header">
-            <div class="vibe-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-              >
-                <polyline points="16 18 22 12 16 6" />
-                <polyline points="8 6 2 12 8 18" />
-              </svg>
-            </div>
-            <div>
-              <div class="vibe-step-title">Python 기반 백엔드</div>
-              <div class="vibe-step-sub">FastAPI</div>
-            </div>
-          </div>
-          <ul class="ai-bullets">
-            <li>
-              미디어 믹스 구조화 데이터셋 및 벡터 스토어 기반
-              <span class="hl">검색·조회 API</span> 구성
-            </li>
-            <li>
-              데이터컨설팅팀 테스트/개발
-              <span class="hl">Marketing Mix Model 모듈</span> 통합
-            </li>
-            <li>
-              벡터 유사도 검색, 필터 조건 처리, 집계 쿼리 등 핵심 엔드포인트
-              제공
-            </li>
-          </ul>
+  <div class="subsection" id="s3-4">
+    <div class="subsection-title">3-4. 다중 헤더</div>
+    <div class="grid-wrap">
+      <div class="ai-need-card">
+        <div class="ai-need-copy">
+          <div class="ai-need-label">파일마다 달라지는 다중행 헤더 구조</div>
+          <p class="ai-need-desc">
+            일부 미디어믹스 표는 실제 컬럼명 위에 헤더가 함께 포함되어 있음. 이때 어떤 행을
+            실제 컬럼명으로 볼지, 어떤 행을 상위 설명 정보로 볼지 파일마다
+            형태가 달라짐.
+          </p>
         </div>
-
-        <div class="vibe-connector">
-          <div class="vibe-connector-arrow">→</div>
-          <div class="vibe-connector-label">API</div>
-        </div>
-
-        <div class="vibe-step">
-          <div class="vibe-step-header">
-            <img
-              src="statics/claude-code-logo.png"
-              alt="Claude Code"
-              class="vibe-cc-logo"
-            />
-            <div>
-              <div class="vibe-step-title">프론트엔드 바이브코딩</div>
-              <div class="vibe-step-sub">Claude Code · React · Vite</div>
-            </div>
-          </div>
-          <ul class="ai-bullets">
-            <li>
-              <span class="hl">Claude Code</span>와의 대화로 React 컴포넌트·API
-              연동·시각화 레이어를 단계적으로 구현
-            </li>
-            <li>
-              별도 프론트엔드 개발 인력 없이
-              <span class="hl">AI 도구만으로 실무 수준의 인터페이스</span>
-              완성
-            </li>
-            <li>
-              바이브코딩 방법론의 실제 적용 가능성을 프로젝트 결과물로 직접 검증
-            </li>
-          </ul>
-        </div>
+        <img
+          src="statics/3-4.png"
+          alt="여러 행으로 구성된 다중 헤더 예시"
+          class="ai-need-img"
+        />
       </div>
     </div>
   </div>

@@ -9,6 +9,9 @@ async function loadSections() {
     wrap.innerHTML = html;
     while (wrap.firstChild) main.appendChild(wrap.firstChild);
   }
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
   initObserver();
 }
 
