@@ -17,8 +17,8 @@
           <div class="proc-body">
             <div class="proc-title">엑셀 보고서 취합</div>
             <div class="proc-desc">
-              사내 축적 광고 캠페인 엑셀 보고서 수집 및 정리 — 2023년 부터
-              집행된 4,753건의 미디어믹스 취합
+              사내 축적 광고 캠페인 엑셀 보고서 수집 및 정리 
+              <span class="proc-desc-sub"> — 2023년 부터 집행된 4,753건의 미디어믹스 취합</span>
             </div>
             <div class="proc-meta">
               <span class="proc-tag proc-tag--lang">Python</span>
@@ -36,8 +36,7 @@
             <div class="proc-copy">
               <div class="proc-title">엑셀 보고서별 시트 목록 수집</div>
               <div class="proc-desc">
-                파일별 전체 시트 목록 및 숨김 해제 시트 목록을 수집 — 파일 연도
-                추정값 포함
+                파일별 전체 시트 목록 및 숨김 해제 시트 목록을 수집
               </div>
               <div class="proc-meta">
                 <span class="proc-tag proc-tag--lang">Python</span>
@@ -85,7 +84,7 @@
           <div class="proc-body">
             <div class="proc-title">미디어 믹스 영역 분리</div>
             <div class="proc-desc">
-              헤더 행(anchor)을 자동 감지하여 상단
+              헤더 행(anchor)을 감지하여 상단
               <strong>Macro</strong>(캠페인 요약 영역)와 하단
               <strong>Micro</strong>(매체별 데이터 행) 블록으로 분리
             </div>
@@ -131,10 +130,10 @@
             <div class="proc-line"></div>
           </div>
           <div class="proc-body">
-            <div class="proc-title">미디어 믹스 하단 영역 컬럼 분류</div>
+            <div class="proc-title">미디어 믹스 Micro(하단) 영역 컬럼 역할 분류</div>
             <div class="proc-desc">
-              Micro 영역의 고유 컬럼 조합을 LLM으로 분류 — device / targeting /
-              period / remark 역할 판별
+              Micro 영역의 컬럼을 LLM으로 분류 
+              <span class="proc-desc-sub"> — device / targeting / period / remark 역할 판별 </span>
             </div>
             <div class="proc-meta">
               <span class="proc-tag proc-tag--llm">OpenAI Batch API</span>
@@ -215,7 +214,7 @@
             <div class="proc-line"></div>
           </div>
           <div class="proc-body">
-            <div class="proc-title">미디어 믹스 하단 영역 데이터 구조화</div>
+            <div class="proc-title">미디어 믹스 Micro(하단) 영역 데이터 구조화</div>
             <div class="proc-desc">
               컬럼 분류 결과를 기반으로 행별 디바이스 · 타겟팅 · 집행 기간 추출,
               정제(환율 변환, 결측값 대체, 기간 보정) 후 적재
@@ -382,7 +381,7 @@ identity_text 전체에서 기간 표현을 찾으세요.
             <div class="proc-line"></div>
           </div>
           <div class="proc-body">
-            <div class="proc-title">미디어 믹스 상단 영역 데이터 구조화</div>
+            <div class="proc-title">미디어 믹스 Macro(상단) 영역 데이터 구조화</div>
             <div class="proc-desc">
               Macro 블록 + 파일명 기반으로 광고주명 · 캠페인명 · 집행 기간 등
               캠페인 메타 정보를 추출
@@ -655,8 +654,6 @@ identity_text 전체에서 기간 표현을 찾으세요.
                 align-items: center;
                 gap: 0;
                 margin-top: 12px;
-                border: 1px solid var(--border);
-                border-radius: 4px;
                 overflow: hidden;
               "
             >
@@ -664,10 +661,12 @@ identity_text 전체에서 기간 표현을 찾으세요.
                 style="
                   padding: 16px 18px;
                   background: var(--surface-raised);
+                  border: 1px solid var(--border);
+                  border-radius: 4px;
                   text-align: center;
                 "
               >
-                <div
+                <span
                   style="
                     font-family: var(--font-headline);
                     font-size: 1.6rem;
@@ -677,10 +676,10 @@ identity_text 전체에서 기간 표현을 찾으세요.
                   "
                 >
                   4,753
-                </div>
-                <div
+              </span>
+                <span
                   style="
-                    font-family: var(--font-data);
+                    font-family: var(--font-body);
                     font-size: 0.62rem;
                     color: var(--text-tertiary);
                     margin-top: 4px;
@@ -688,7 +687,7 @@ identity_text 전체에서 기간 표현을 찾으세요.
                   "
                 >
                   건 수집
-                </div>
+                </span>
                 <div
                   style="
                     font-family: var(--font-body);
@@ -703,9 +702,6 @@ identity_text 전체에서 기간 표현을 찾으세요.
               <div
                 style="
                   padding: 0 14px;
-                  background: var(--surface);
-                  border-left: 1px solid var(--border);
-                  border-right: 1px solid var(--border);
                   height: 100%;
                   display: flex;
                   flex-direction: column;
@@ -733,9 +729,11 @@ identity_text 전체에서 기간 표현을 찾으세요.
                   padding: 16px 18px;
                   background: var(--surface-raised);
                   text-align: center;
+                  border: 1px solid var(--border);
+                  border-radius: 4px;
                 "
               >
-                <div
+                <span
                   style="
                     font-family: var(--font-headline);
                     font-size: 1.6rem;
@@ -745,10 +743,10 @@ identity_text 전체에서 기간 표현을 찾으세요.
                   "
                 >
                   3,558
-                </div>
-                <div
+                </span>
+                <span
                   style="
-                    font-family: var(--font-data);
+                    font-family: var(--font-body);
                     font-size: 0.62rem;
                     color: var(--text-tertiary);
                     margin-top: 4px;
@@ -756,7 +754,7 @@ identity_text 전체에서 기간 표현을 찾으세요.
                   "
                 >
                   건 감지
-                </div>
+                </span>
                 <div
                   style="
                     font-family: var(--font-body);
@@ -771,9 +769,6 @@ identity_text 전체에서 기간 표현을 찾으세요.
               <div
                 style="
                   padding: 0 14px;
-                  background: var(--surface);
-                  border-left: 1px solid var(--border);
-                  border-right: 1px solid var(--border);
                   height: 100%;
                   display: flex;
                   flex-direction: column;
@@ -801,9 +796,11 @@ identity_text 전체에서 기간 표현을 찾으세요.
                   padding: 16px 18px;
                   background: var(--accent-muted);
                   text-align: center;
+                  border: 1px solid var(--border);
+                  border-radius: 4px;
                 "
               >
-                <div
+                <span
                   style="
                     font-family: var(--font-headline);
                     font-size: 1.6rem;
@@ -813,10 +810,10 @@ identity_text 전체에서 기간 표현을 찾으세요.
                   "
                 >
                   3,448 (72.5%)
-                </div>
-                <div
+                </span>
+                <span
                   style="
-                    font-family: var(--font-data);
+                    font-family: var(--font-body);
                     font-size: 0.62rem;
                     color: var(--accent);
                     margin-top: 4px;
@@ -825,7 +822,7 @@ identity_text 전체에서 기간 표현을 찾으세요.
                   "
                 >
                   건 완료
-                </div>
+                </span>
                 <div
                   style="
                     font-family: var(--font-body);
@@ -892,115 +889,6 @@ identity_text 전체에서 기간 표현을 찾으세요.
             >을 참고
           </li>
         </ul>
-        <div
-          style="
-            margin-top: 12px;
-            padding: 12px 14px;
-            background: var(--surface-raised);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-          "
-        >
-          <div style="display: flex; align-items: center; gap: 10px">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              style="
-                width: 15px;
-                height: 15px;
-                flex-shrink: 0;
-                color: var(--accent);
-              "
-            >
-              <circle cx="12" cy="12" r="10" />
-              <line x1="2" y1="12" x2="22" y2="12" />
-              <path
-                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-              />
-            </svg>
-            <span
-              style="
-                font-family: var(--font-body);
-                font-size: 0.8rem;
-                color: var(--text-secondary);
-              "
-              >데모 시스템</span
-            >
-            <a
-              href="https://mixpedia-50799312352.asia-northeast3.run.app/login"
-              target="_blank"
-              rel="noopener"
-              style="
-                font-family: var(--font-data);
-                font-size: 0.75rem;
-                color: var(--accent);
-                text-decoration: none;
-              "
-            >
-              https://mixpedia-50799312352.asia-northeast3.run.app/login
-            </a>
-          </div>
-          <div
-            style="
-              display: flex;
-              align-items: center;
-              gap: 16px;
-              padding-left: 25px;
-            "
-          >
-            <div style="display: flex; align-items: center; gap: 6px">
-              <span
-                style="
-                  font-family: var(--font-data);
-                  font-size: 0.68rem;
-                  color: var(--text-tertiary);
-                  width: 24px;
-                "
-                >ID</span
-              >
-              <code
-                style="
-                  font-family: var(--font-data);
-                  font-size: 0.75rem;
-                  background: var(--surface);
-                  border: 1px solid var(--border);
-                  border-radius: 3px;
-                  padding: 2px 8px;
-                  color: var(--text);
-                "
-                >mixpedia@dmcmedia.co.kr</code
-              >
-            </div>
-            <div style="display: flex; align-items: center; gap: 6px">
-              <span
-                style="
-                  font-family: var(--font-data);
-                  font-size: 0.68rem;
-                  color: var(--text-tertiary);
-                  width: 24px;
-                "
-                >PW</span
-              >
-              <code
-                style="
-                  font-family: var(--font-data);
-                  font-size: 0.75rem;
-                  background: var(--surface);
-                  border: 1px solid var(--border);
-                  border-radius: 3px;
-                  padding: 2px 8px;
-                  color: var(--text);
-                "
-                >mixpedia1!</code
-              >
-            </div>
-          </div>
-        </div>
       </div>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px">
@@ -1078,11 +966,11 @@ identity_text 전체에서 기간 표현을 찾으세요.
       <div class="ai-callout">
         <p class="ai-callout-lead">
           데이터컨설팅팀이 연구/구축 중인
-          <span class="hl">MMM (Marketing Mix Model) 모듈</span>이 통합
+          <span class="hl">MMM (Marketing Mix Model) 모듈</span> 통합
         </p>
         <ul class="ai-bullets">
           <li>
-            <strong>MMM이란</strong>매체별 광고비 집행과 매출·전환 성과 간의
+            <strong>MMM이란</strong> 매체별 광고비 집행과 매출·전환 성과 간의
             관계를 Regression ML 모델로 정량화하는 마케팅 효과 측정 방법론<br />예)
             Google Meridian, Meta Robyn 등
           </li>
