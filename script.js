@@ -12,7 +12,20 @@ async function loadSections() {
   if (window.lucide) {
     window.lucide.createIcons();
   }
+  initToggleChips();
   initObserver();
+}
+
+function initToggleChips() {
+  document.querySelectorAll("[data-toggle-target]").forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const target = document.getElementById(toggle.dataset.toggleTarget);
+      if (!target) return;
+      const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!isExpanded));
+      target.hidden = isExpanded;
+    });
+  });
 }
 
 function initObserver() {
