@@ -1849,11 +1849,17 @@ p:last-child {
   display: grid;
   grid-template-columns: minmax(160px, 1fr) minmax(100px, 1fr);
   align-items: center;
-  gap: 120px;
+  gap: 80px;
 }
 
 .proc-copy {
   min-width: 0;
+}
+
+.proc-media-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .proc-media-img {
