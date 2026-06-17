@@ -2024,11 +2024,12 @@ p:last-child {
   display: grid;
   grid-template-columns: 6fr 32px 4fr;
   align-items: center;
-  margin: 10px 0 6px;
+  margin: 20px 0 6px;
 }
 .parse-img {
   display: block;
   width: 100%;
+  border: 1px solid var(--border);
   border-radius: 4px;
 }
 .parse-arrow {
