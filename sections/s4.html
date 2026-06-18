@@ -114,6 +114,7 @@
             <div class="proc-desc">
               Micro 영역의 컬럼을 LLM으로 분류하여 역할 판별
             </div>
+            <div class="proc-desc-sub"> 예) impressions, 노출, 예상 노출, exp.imps ...  <b> →  노출</b> </div>
             <div class="proc-meta">
               <span class="proc-tag proc-tag--llm">OpenAI Batch API</span>
               <span class="proc-tag proc-tag--llm">Structured Output</span>
@@ -198,6 +199,7 @@
               컬럼 분류 결과를 기반으로 행별 디바이스 · 타겟팅 · 집행 기간 추출,
               정제(환율 변환, 결측값 대체, 기간 보정) 후 적재
             </div>
+            <div class="proc-desc-sub"> 예) 25~44 여성, F2544 ...  <b> →  성별: F, 최소 연령: 25, 최대 연령: 44</b> </div>
             <div class="proc-meta">
               <span class="proc-tag proc-tag--llm">OpenAI Batch API</span>
               <span class="proc-tag proc-tag--llm">Structured Output</span>
@@ -493,14 +495,15 @@ identity_text 전체에서 기간 표현을 찾으세요.
           <div class="proc-body">
             <div class="proc-title">미디어 믹스 별 업종 분류</div>
             <div class="proc-desc">
-              광고주별 업종을 LLM으로 1Depth · 2Depth 분류 — 생소한 브랜드는
-              Tavily
+              광고주별 업종을 LLM으로 1Depth · 2Depth 분류
+              <span class="proc-desc-sub"> — 생소한 브랜드는
               <img
                 src="statics/tavily-logo.png"
                 class="badge-logo"
                 alt="Tavily"
               />
               Tavily 웹검색을 연동해 사업 내용 확인 후 판단
+              </span>
             </div>
             <div class="proc-meta">
               <span class="proc-tag proc-tag--llm">OpenAI Tool Use</span>
@@ -624,8 +627,9 @@ identity_text 전체에서 기간 표현을 찾으세요.
           <div class="proc-body">
             <div class="proc-title">파이프라인 처리 결과</div>
             <div class="proc-desc">
-              00~06 단계 전체 파이프라인을 통과한 최종 구조화 데이터 적재 수량
+              00~06 단계 전체 파이프라인을 통과한 최종 구조화 데이터 적재
             </div>
+            <div class="proc-desc-sub">미디어 믹스 → 2개 영역 분리 → 컬럼 판별 → 데이터 정제 → 구조화 데이터 적재</div>
             <div
               style="
                 display: grid;
