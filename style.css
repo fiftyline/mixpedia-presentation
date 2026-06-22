@@ -2045,7 +2045,7 @@ p:last-child {
 
 .parse-wrap {
   display: grid;
-  grid-template-columns: 6fr 32px 4fr;
+  grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr);
   align-items: center;
   margin: 20px 0 6px;
 }
