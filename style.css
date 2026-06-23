@@ -521,23 +521,74 @@ p:last-child {
 }
 
 .closing-card {
-  padding: 24px 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.closing-state {
+  padding: 22px 24px;
   border: 1px solid var(--border);
   border-radius: 4px;
   background: var(--surface);
 }
 
-.closing-card p {
-  font-size: 0.9rem;
-  line-height: 1.8;
-  color: var(--text-secondary);
-  margin-bottom: 10px;
+.closing-state--next {
+  border-color: var(--accent);
+  background: var(--accent-muted);
 }
 
-.closing-card p:last-child {
-  margin-bottom: 0;
+.closing-state-label {
+  font-family: var(--font-headline);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0;
   color: var(--text);
-  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.closing-state--next .closing-state-label {
+  color: var(--accent);
+}
+
+.closing-state-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.closing-state-list li {
+  position: relative;
+  padding-left: 13px;
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.closing-state-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.closing-state-conclusion {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(79, 111, 255, 0.24);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1.55;
 }
 
 .split-card {
@@ -2119,6 +2170,10 @@ p:last-child {
   }
 
   .split-card {
+    grid-template-columns: 1fr;
+  }
+
+  .closing-card {
     grid-template-columns: 1fr;
   }
 
