@@ -16,6 +16,7 @@
 
   --sidebar-bg: #111827;
   --sidebar-border: #1f2937;
+  --sidebar-width: 280px;
 
   --font-headline: "Outfit", sans-serif;
   --font-body: "DM Sans", sans-serif;
@@ -49,7 +50,9 @@ body {
 }
 
 .sidebar {
-  width: 280px;
+  width: var(--sidebar-width);
+  min-width: 220px;
+  max-width: 420px;
   background: var(--sidebar-bg);
   border-right: 1px solid var(--sidebar-border);
   flex-shrink: 0;
@@ -59,6 +62,39 @@ body {
   top: 0;
   height: 100vh;
   overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar-resizer {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 20;
+}
+
+.sidebar-resizer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 3px;
+  width: 1px;
+  height: 100%;
+  background: transparent;
+  transition: background 0.15s;
+}
+
+.sidebar-resizer:hover::before,
+.sidebar-resizer:focus-visible::before,
+body.is-resizing-sidebar .sidebar-resizer::before {
+  background: #a5b4fc;
+}
+
+body.is-resizing-sidebar {
+  cursor: col-resize;
+  user-select: none;
 }
 
 .sidebar-header {
@@ -2193,6 +2229,9 @@ p:last-child {
 
 @media (max-width: 800px) {
   .sidebar {
+    display: none;
+  }
+  .sidebar-resizer {
     display: none;
   }
   .main {
